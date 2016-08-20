@@ -28,12 +28,20 @@
     <div flow-init
          flow-name="uploader.flow"
          flow-files-added="processFiles($files)">
-      <button class="btn btn-default" flow-btn type="file">Załaduj baner</button>
+      <button flow-btn type="file">Upload image</button>
+      <input type="text" value="{{JSON.stringify(uploader.flow)}}">
 
-      <div ng-repeat="image in uploader.flow.files track by $index" id="preview">
-        <img width="800px" height="auto" class="preview" flow-img="image"/><br>
+      <div ng-repeat="image in uploader.flow.files track by $index">
+        <img id="canvas2" style="max-width: 800px; max-height: 400px;" flow-img="image"/>
       </div>
     </div>
+
+      <canvas id="canvas"></canvas>
+
+
+    <button type="button" ng-click="test()">test</button>
+    <button type="button" ng-click="create()">Generate view of banner</button>
+    <button type="button" ng-click="downloadCanvas()">Download project</button>
 
   </div>
 
@@ -48,5 +56,6 @@
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="components/controller.js"></script>
+  <script src="components/fabric.min.js"></script>
 </body>
 </html>
