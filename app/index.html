@@ -29,12 +29,22 @@
          flow-name="uploader.flow"
          flow-files-added="processFiles($files)">
       <button flow-btn type="file">Upload image</button>
-      <input type="text" value="{{JSON.stringify(uploader.flow)}}">
 
       <div ng-repeat="image in uploader.flow.files track by $index">
-        <img id="canvas2" style="max-width: 800px; max-height: 400px;" flow-img="image"/>
+        <img id="foto" style="max-width: 800px; max-height: 400px;" flow-img="image"/>
       </div>
     </div>
+
+
+    <form>
+      Spacing of items:<br>
+      <input type="number" ng-model="customConf.spacing"/><br>
+      Diameter of item:<br>
+      <input type="number" ng-model="customConf.diameter"/><br>
+      Restrictions of margin:<br>
+      <input type="number" ng-model="customConf.margin"/><br>
+    </form>
+
 
       <canvas id="canvas"></canvas>
 

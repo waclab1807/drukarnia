@@ -7,6 +7,7 @@ app.controller('mainController', ['$scope', function($scope){
     $scope.msg = 'mainController';
 
     var canvas = window._canvas = new fabric.Canvas('canvas');
+    var foto = window._canvas = new fabric.Canvas('foto');
 
     /** downloading picture */
     $scope.downloadCanvas = function () {
@@ -44,6 +45,9 @@ app.controller('mainController', ['$scope', function($scope){
     };
 
     $scope.create = function () {
+        console.log(canvas.getActiveObject());
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject) canvas.remove(activeObject);
         var columnsNumber = ((($scope.customConf.width - (2 * $scope.customConf.margin) - $scope.customConf.diameter * 2) / ($scope.customConf.spacing + ($scope.customConf.diameter * 2))) ) + 1;
         var columns = parseInt(columnsNumber);
         var errorSumAddedColumn = (columnsNumber % columns * ($scope.customConf.spacing + ($scope.customConf.diameter * 2))) / columns;
@@ -108,23 +112,21 @@ app.controller('mainController', ['$scope', function($scope){
     };
 
     $scope.test = function() {
-        console.log($scope.uploader.flow); //todo rozebrac to drzewo
-        var canvas = document.getElementById("canvas");
-        var canvas2 = document.getElementById("canvas2");
-        var ctx = canvas.getContext("2d");
-
         var image = new Image();
         image.onload = function() {
-            ctx.drawImage(image, 0, 0, canvas2.width, canvas2.height);
+            var image2 = new fabric.Image(image);
+            canvas.add(image2);
+            image2.set({
+                scaleY: canvas.height / foto.height,
+                scaleX: canvas.width / foto.width,
+                selectable: false
+            });
+                canvas.setHeight(image2.getHeight());
+                canvas.setWidth(image2.getWidth());
+                $scope.customConf.height = image2.getHeight();
+                $scope.customConf.width = image2.getWidth();
         };
         image.src = $scope.imageStrings[0];
-        //fabric.Image.fromURL('image', function (img) {
-        //    canvas.add(img);
-        //    canvas.setHeight(img.getHeight());
-        //    canvas.setWidth(img.getWidth());
-        //    $scope.customConf.height = img.getHeight();
-        //    $scope.customConf.width = img.getWidth();
-        //});
     };
 
 }] );
