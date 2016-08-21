@@ -30,9 +30,9 @@
          flow-files-added="processFiles($files)">
       <button flow-btn type="file">Upload image</button>
 
-      <div ng-repeat="image in uploader.flow.files track by $index">
-        <img id="foto" style="max-width: 800px; max-height: 400px;" flow-img="image"/>
-      </div>
+      <!--<div ng-repeat="image in uploader.flow.files track by $index">-->
+        <!--<img style="max-width: 800px; max-height: 400px;" flow-img="image"/>-->
+      <!--</div>-->
     </div>
 
 
@@ -49,8 +49,7 @@
       <canvas id="canvas"></canvas>
 
 
-    <button type="button" ng-click="test()">test</button>
-    <button type="button" ng-click="create()">Generate view of banner</button>
+    <button type="button" ng-click="create()">Draw dots</button>
     <button type="button" ng-click="downloadCanvas()">Download project</button>
 
   </div>

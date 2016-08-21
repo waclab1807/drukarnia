@@ -7,7 +7,6 @@ app.controller('mainController', ['$scope', function($scope){
     $scope.msg = 'mainController';
 
     var canvas = window._canvas = new fabric.Canvas('canvas');
-    var foto = window._canvas = new fabric.Canvas('foto');
 
     /** downloading picture */
     $scope.downloadCanvas = function () {
@@ -24,6 +23,7 @@ app.controller('mainController', ['$scope', function($scope){
             aLink.download = 'image.png';
             aLink.href = image;
             aLink.dispatchEvent(evt);
+            console.log('downloaded');
         }
         catch (ex)
         {
@@ -31,6 +31,7 @@ app.controller('mainController', ['$scope', function($scope){
             aLink.download = 'image.png';
             aLink.href = image;
             aLink.dispatchEvent(evt);
+            console.log('download failed');
         }
 
     };
@@ -109,16 +110,17 @@ app.controller('mainController', ['$scope', function($scope){
             };
             fileReader.readAsDataURL(flowFile.file);
         });
+        setTimeout(function(){
+            $scope.showImage();
+        },500);
     };
 
-    $scope.test = function() {
+    $scope.showImage = function() {
         var image = new Image();
         image.onload = function() {
             var image2 = new fabric.Image(image);
             canvas.add(image2);
             image2.set({
-                scaleY: canvas.height / foto.height,
-                scaleX: canvas.width / foto.width,
                 selectable: false
             });
                 canvas.setHeight(image2.getHeight());
